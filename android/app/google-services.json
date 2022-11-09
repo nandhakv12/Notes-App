@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "82515460442",
+    "project_id": "leran01",
+    "storage_bucket": "leran01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82515460442:android:abf2bb3f035acda7173363",
+        "android_client_info": {
+          "package_name": "com.example.learn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "82515460442-pvllopeesgnu12cmcdq3vlehj9qrggvu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-dIpnBA7fMdYSfArjQzSzeLMZjcAowsI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "82515460442-pvllopeesgnu12cmcdq3vlehj9qrggvu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
