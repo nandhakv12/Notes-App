@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
 import 'package:learn/constants/routes.dart';
+import 'package:learn/services/auth/auth_exception.dart';
+import 'package:learn/services/auth/auth_services.dart';
 
 import '../utilities/show_error_dialouge.dart';
 
@@ -57,35 +57,43 @@ class _LoginViewState extends State<LoginView> {
               final email = _email.text;
               final password = _password.text;
               try {
-                final userCredential =
-                    await FirebaseAuth.instance.signInWithEmailAndPassword(
+                await AuthServices.firebase().logIn(
                   email: email,
                   password: password,
                 );
-                // ignore: use_build_context_synchronously
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil(notesRoute, (route) => false);
-              } on FirebaseAuthException catch (e) {
-                if (e.code == 'user-not-found') {
-                  await showErrorDialog(
-                    context,
-                    'user not found',
+                final user = AuthServices.firebase().currentUser;
+                if (user?.isEmailVerified ?? false) {
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    notesRoute,
+                    (route) => false,
                   );
-                } else if (e.code == 'wrong-password') {
-                  await showErrorDialog(
-                    context,
-                    'wrong password',
-                  );
+                  //email verified
+
+//
                 } else {
-                  await showErrorDialog(
-                    context,
-                    'Error: ${e.code}',
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    verifyEmailRoute,
+                    (route) => false,
                   );
+
+                  //email not verified
                 }
-              } catch (e) {
+              } on UserNotFoundException {
                 await showErrorDialog(
                   context,
-                  e.toString(),
+                  'user not found',
+                );
+              } on WeakPasswordException {
+                await showErrorDialog(
+                  context,
+                  'wrong password',
+                );
+              } on GenericAuthException {
+                await showErrorDialog(
+                  context,
+                  'Authentication erroe',
                 );
               }
             },
