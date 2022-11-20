@@ -3,7 +3,7 @@ import 'package:learn/constants/routes.dart';
 import 'package:learn/services/auth/auth_exception.dart';
 import 'package:learn/services/auth/auth_services.dart';
 
-import '../utilities/show_error_dialouge.dart';
+import '../utilities/dialogues/error_dialogue.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
